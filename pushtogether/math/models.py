@@ -1,9 +1,7 @@
+from django.conf import settings
+from django.contrib.postgres.fields import JSONField
 from django.db import models, transaction
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.postgres.fields import JSONField, ArrayField
-from django.conf import settings
-
-from pushtogether.conversations.models import Conversation
 
 
 class Job(models.Model):
@@ -29,7 +27,7 @@ class Job(models.Model):
         (STUCKED, _('STUCKED')),
     )
 
-    conversation = models.ForeignKey(Conversation, related_name="math_jobs")
+    conversation = models.ForeignKey('conversations.Conversation', related_name="math_jobs")
     type = models.CharField(_("Type"), choices=TYPE_CHOICES, max_length=20)
     status = models.CharField(
         _("Status"),

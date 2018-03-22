@@ -1,16 +1,11 @@
 """
 Production Configurations
 
-
 - Use Amazon's S3 for storing static files and uploaded media
 - Use mailgun to send emails
 - Use Redis for cache
-
 - Use sentry for error logging
-
-
 """
-
 
 import logging
 
@@ -58,7 +53,6 @@ X_FRAME_OPTIONS = 'DENY'
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
-# END SITE CONFIGURATION
 
 INSTALLED_APPS += ['gunicorn', ]
 
@@ -133,7 +127,7 @@ if env('DJANGO_SENTRY_DSN', default=False):
         'formatters': {
             'verbose': {
                 'format': '%(levelname)s %(asctime)s %(module)s '
-                        '%(process)d %(thread)d %(message)s'
+                '%(process)d %(thread)d %(message)s'
             },
         },
         'handlers': {
@@ -181,3 +175,5 @@ ADMIN_URL = env('DJANGO_ADMIN_URL', default=r'^admin/')
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+
+

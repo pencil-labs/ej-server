@@ -2,12 +2,13 @@
 Local settings
 
 - Run in Debug mode
-
 - Use console backend for emails
-
 - Add Django Debug Toolbar
 - Add django-extensions as app
 """
+
+import socket
+import os
 
 from .base import *  # noqa
 
@@ -16,8 +17,8 @@ from .base import *  # noqa
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
-RUNSERVER_PLUS_PRINT_SQL_TRUNCATE = 10**7
-SHELL_PLUS_PRINT_SQL_TRUNCATE = 10**7
+RUNSERVER_PLUS_PRINT_SQL_TRUNCATE = 10 ** 7
+SHELL_PLUS_PRINT_SQL_TRUNCATE = 10 ** 7
 
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -32,7 +33,6 @@ EMAIL_PORT = 1025
 EMAIL_HOST = 'localhost'
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
                     default='django.core.mail.backends.console.EmailBackend')
-
 
 # CACHING
 # ------------------------------------------------------------------------------
@@ -50,10 +50,8 @@ INSTALLED_APPS += ['debug_toolbar', ]
 
 INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', ]
 
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost',])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', ])
 
-import socket
-import os
 # tricks to have debug toolbar when developing with docker
 if os.environ.get('USE_DOCKER') == 'yes':
     ip = socket.gethostbyname(socket.gethostname())
@@ -64,6 +62,7 @@ DEBUG_TOOLBAR_CONFIG = {
         'debug_toolbar.panels.redirects.RedirectsPanel',
     ],
     'SHOW_TEMPLATE_CONTEXT': True,
+    'SHOW_TOOLBAR_CALLBACK': lambda r: 'DISABLE_TOOLBAR' not in os.environ,
 }
 
 # django-extensions and math module

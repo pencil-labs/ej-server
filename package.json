@@ -1,0 +1,38 @@
+{
+  "name": "ejplatform",
+  "version": "0.1.0",
+  "description": "Social Participation App",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ejplatform/ejplatform.git"
+  },
+  "keywords": [
+    "Social",
+    "Participation",
+    "Gamification",
+    "Machine",
+    "Learning"
+  ],
+  "author": "LAPPIS+Hacklab",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ejplatform/ejplatform/issues"
+  },
+  "homepage": "https://github.com/ejplatform/ejplatform#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "inuitcss": "^6.0.0",
+    "jquery": "^3.3.1",
+    "popper": "^1.0.1",
+    "sass-mq": "^4.0.2"
+  }
+}

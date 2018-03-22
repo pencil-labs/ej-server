@@ -15,6 +15,3 @@ pytest-django==3.1.2
 
 # django-courier
 git+https://gitlab.com/empurrandojuntos/django-courier.git
-
-# pushtogether math module
-pushtogether-math

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+
 from .models import User
 
 
@@ -11,7 +12,6 @@ class MyUserChangeForm(UserChangeForm):
 
 
 class MyUserCreationForm(UserCreationForm):
-
     error_message = UserCreationForm.error_messages.update({
         'duplicate_username': 'This username has already been taken.'
     })
@@ -33,10 +33,11 @@ class MyUserAdmin(AuthUserAdmin):
     form = MyUserChangeForm
     add_form = MyUserCreationForm
     fieldsets = (
-            ('User Profile', {'fields': (
+        ('User Profile', {
+            'fields': (
                 'name', 'email', 'city', 'state', 'country', 'race', 'tour_step',
-                'gender', 'occupation', 'age', 'political_movement', 'biography', 'image',
-            )}),
+                'gender', 'occupation', 'age', 'political_movement', 'biography', 'image', )
+        }),
     ) + AuthUserAdmin.fieldsets
     list_display = ('username', 'name', 'email', 'is_superuser')
     search_fields = ['name', 'email', 'username']

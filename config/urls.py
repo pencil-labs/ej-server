@@ -2,17 +2,16 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from django.views.generic.base import RedirectView
 from rest_framework.documentation import include_docs_urls
 
+from config.all_views import patterns
 from pushtogether.users.views import FacebookLogin, TwitterLogin
 
-
-urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+urlpatterns = patterns + [
+    # url(r'^$', TemplateView.as_view(template_name='index.jinja2'), name='home'),
+    # url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
@@ -29,11 +28,13 @@ urlpatterns = [
     url(r'^api/auth/twitter/$', TwitterLogin.as_view(), name='tw_login'),
     url(r'^rest-auth/', include('rest_auth.urls')),
     # TODO: Remove this redirect after october 2017
-    url(r'^rest-auth/registration/account-confirm-email/(?P<key>[-:\w]+)/$', RedirectView.as_view(pattern_name='account_confirm_email'), name='account-confirm-email-redirect'),
+    url(r'^rest-auth/registration/account-confirm-email/(?P<key>[-:\w]+)/$',
+        RedirectView.as_view(pattern_name='account_confirm_email'), name='account-confirm-email-redirect'),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^activity/', include('actstream.urls')),
     url(r'^api/', include('courier.urls', namespace='courier')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
@@ -47,6 +48,5 @@ if settings.DEBUG:
     ]
     if 'debug_toolbar' in settings.INSTALLED_APPS:
         import debug_toolbar
-        urlpatterns = [
-            url(r'^__debug__/', include(debug_toolbar.urls)),
-        ] + urlpatterns
+
+        urlpatterns = [url(r'^__debug__/', include(debug_toolbar.urls))] + urlpatterns
