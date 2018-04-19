@@ -8,5 +8,6 @@ router_v1 = DefaultRouter()
 register(router_v1, 'ej.users.api')
 register(router_v1, 'ej.math.api')
 register(router_v1, 'ej.gamification.api')
+register(router_v1, 'ej.front_config.api')
 
 ej_conversations.api.register_routes(router_v1, register_user=True)

@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'ej.users.apps.UsersConfig',
     'ej.gamification.apps.GamificationConfig',
     'ej.math.apps.MathConfig',
+    'ej.front_config.apps.FrontConfig',
 
     # External EJ Apps
     'ej_conversations.apps.EjConversationsConfig',
