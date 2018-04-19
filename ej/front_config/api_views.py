@@ -1,9 +1,11 @@
-from .models import SocialMedia
-from .serializers import SocialMediaSerializer
+from .models import SocialMedia, ColorPallet
+from .serializers import SocialMediaSerializer, ColorPalletSerializer
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
 
 class SocialMediaViewSet(ModelViewSet):
     serializer_class = SocialMediaSerializer
     queryset = SocialMedia.objects.all()
 
+class ColorPalletViewSet(ModelViewSet):
+    serializer_class = ColorPalletSerializer
+    queryset = ColorPallet.objects.all()
