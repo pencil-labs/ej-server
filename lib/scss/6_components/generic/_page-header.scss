@@ -71,6 +71,9 @@ $header-box-shadow-lower: 0 -2px 4px 0 rgba(0, 0, 0, 0.05) !default;
         i.fa {
             font-size: $font-size-h3;
         }
+        .Header-topIcon {
+            cursor: pointer;
+        }
 
         @media only screen and (min-width: $breakpoint-small) {
             box-shadow: none;
