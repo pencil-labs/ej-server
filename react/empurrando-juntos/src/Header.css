@@ -1,0 +1,19 @@
+.Header {
+  height: 50px;
+  padding: 10px;
+  text-align: left;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.Header-logo {
+  height: 50px;
+}
+
+.Header span {
+  float: right;
+  line-height: 50px;
+  font-family: "Raleway", sans-serif;
+  color: #333;
+  font-size: 14px;
+}
