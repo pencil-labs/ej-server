@@ -171,7 +171,7 @@
                 }
             }
             window.onload = function() {
-                runRemoteScripts('load');
+                runRemoteScripts();
                 up.on('up:fragment:inserted', function(event, fragment) {
                     runRemoteScripts();
                 });
