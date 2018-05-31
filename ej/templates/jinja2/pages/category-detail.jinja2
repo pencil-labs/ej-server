@@ -5,7 +5,8 @@
     {{ conversation_list(
             conversations,
             title='Categoria: {category.name}'.format(category=category),
-            subtitle='Veja as conversas nesta categoria') }}
+            subtitle='Veja as conversas nesta categoria',
+            javascript_enabled=javascript_enabled) }}
 {% endblock %}
 
 

@@ -1,16 +1,28 @@
 {% from 'components/generic/elements.jinja2' import action_button, breadcrumbs, link %}
-
+{% from 'components/generic/react.jinja2' import react_component %}
 
 {#---------------------------------------------------------------------------#
     CONVERSATION LIST
  #---------------------------------------------------------------------------#}
+
 {% macro conversation_list(conversations,
                            categories,
                            title=_('Active conversations'),
-                           subtitle=_('See some active conversations and give your opinion')) %}
+                           subtitle=_('See some active conversations and give your opinion'),
+                           javascript_enabled='') %}
+
+    {% if caller %}{% set caller_output = caller() %}{% endif %}
+   
     <div class="ConversationList">
+        {{ react_component('conversation_list', conversation_list_static(conversations, categories, title, subtitle, caller_output), javascript_enabled) }}
+    </div>
+
+{% endmacro %}
+
+{% macro conversation_list_static(conversations, categories, title, subtitle, caller_output=None) %}
+    <div class="ConversationListStatic">
         <div class="ConversationList-title">
-            {% if caller %}{{ caller() }}{% endif %}
+            {% if caller_output %}{{ caller_output }}{% endif %}
             <h1>{{ title }}</h1>
             <h2>{{ subtitle }}</h2>
         </div>
@@ -72,10 +84,18 @@
     CONVERSATION DETAIL
  #---------------------------------------------------------------------------#}
 
-{% macro conversation_detail(conversation, user) %}
-    {% set category = conversation.category %}
+{% macro conversation_detail(conversation, user, javascript_enabled='') %}
 
     <div class="ConversationDetail">
+        {{ react_component('conversation', conversation_detail_static(conversation, user), javascript_enabled, '{"slug":"' + conversation.slug + '"}') }}
+    </div>
+
+{% endmacro %}
+
+{% macro conversation_detail_static(conversation, user) %}
+    {% set category = conversation.category %}
+
+    <div class="ConversationDetailStatic">
         <div class="ConversationDetail-banner">
             <h1>{{ conversation.question }}</h1>
             <ul class="ConversationDetail-statistics">
